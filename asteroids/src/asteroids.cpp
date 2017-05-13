@@ -1,8 +1,7 @@
 /* Asteroids
-    Sample solution for assignment
-    Semester 2 -- Small Embedded Systems
-    Dr Alun Moon
-*/
+
+Henry Williams and Andy White 
+Last Modified: 11/05/2017*/
 
 /* C libraries */
 #include <stdlib.h>
@@ -19,52 +18,42 @@
 #include "model.h"
 #include "view.h"
 #include "controller.h"
-
-/* Game state */
-float elapsed_time; 
-int   score;
-int   lives;
-struct ship player;
+#include "utils.h"
 
 float Dt = 0.01f;
-
-Ticker model, view, controller;
-
+Ticker model, view, controller, asteroids;
 bool paused = true;
-/* The single user button needs to have the PullUp resistor enabled */
-DigitalIn userbutton(P2_10,PullUp);
-int main()
-{
+bool playing;
 
-    init_DBuffer();
-    
-
-    view.attach( draw, 0.025);
-    model.attach( physics, Dt);
-    controller.attach( controls, 0.1);
-    
-    lives = 5;
-    
+int main() {
+	init_DBuffer();
+	initialise_heap();
+	initialise_asteroid_heap();
+	initialiseGame();
+	lives = 3;
+	view.attach(drawGameStartScreen,1.0/50.0);
+	
     /* Pause to start */
-    while( userbutton.read() ){ /* remember 1 is not pressed */
-        paused=true;
-        wait_ms(100);
-    }
-    paused = false;
-    
-    while(true) {
-        /* do one of */
-        /* Wait until all lives have been used
-        while(lives>0){
-            // possibly do something game related here
-            wait_ms(200);
-        }
-        */
-        /* Wait until each life is lost
-        while( inPlay ){
-            // possibly do something game related here
-            wait_ms(200);
-        }
-        */
+    while(1){ 	
+			if (lives <= -1) {
+				view.detach();
+				model.detach();
+			
+			}
+			if (startagain()) {
+				lives = 3;
+				initialiseGame();
+				total_timeAlive = 0;
+				model.attach(physics,Dt);
+				view.attach(draw,0.050); //draw game screen
+				controller.attach( gameControls, 0.1);//gameControls for main game to control ship
+			}
+
+			if (start()) {
+				view.detach();//clear start screen
+				view.attach(draw, 0.050); //draw game screen
+				model.attach(physics,Dt);
+				controller.attach( gameControls, 0.1);//gameControls for main game to control ship
+			}	
     }
 }

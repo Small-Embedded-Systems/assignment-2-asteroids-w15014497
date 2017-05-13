@@ -1,0 +1,18 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;Function to reverse bit order
+    2 00000000         
+    3 00000000         
+    4 00000000         
+                       
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\bitrotation.d -o.\objects\bitrotation.o -I"E:\Year 2\
+Small Embeded Systems\Semester 2\Assignment\Assignment 2 Asteroids\asteroids - 
+old\RTE" -IC:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.0.0\Device\Include -IC:\Keil_
+v5\ARM\CMSIS\Include --predefine="__UVISION_VERSION SETA 520" --predefine="CORE
+_M4 SETA 1" --list=.\listings\bitrotation.lst bitRotation.s
+332 symbols in table

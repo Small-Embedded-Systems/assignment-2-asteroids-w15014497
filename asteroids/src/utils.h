@@ -21,4 +21,5 @@ int randrange(int from, int to);
 float dist(coordinate_t p1, coordinate_t p2);
 
 extern const float pi;
-float radians(float degrees);
+//used
+float radians(float a);

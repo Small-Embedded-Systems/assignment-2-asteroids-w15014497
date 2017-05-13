@@ -1,0 +1,64 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 PRESERVE8                    ; Indicate the code
+                                                             here preserve
+    2 00000000         ; 8 byte stack alignment
+    3 00000000                 THUMB                        ; Indicate THUMB co
+                                                            de is used
+    4 00000000                 AREA             |.text|, CODE, READONLY ; Start
+                                                             of CODE area
+    5 00000000         
+    6 00000000                 EXPORT           flipBits
+    7 00000000                 ENTRY
+    8 00000000         flipBits
+                               FUNCTION
+    9 00000000 B506            PUSH             {R1, R2, LR} ; save return addr
+                                                            ess of r1 and r1 wi
+                                                            th link register
+   10 00000002 4602            MOV              R2, R0      ; moves bits in r0 
+                                                            to r2
+   11 00000004 FA92 F1A2       RBIT             R1, R2      ; reverses the orde
+                                                            r of bit
+   12 00000008 EA4F 6011       LSR              R0, R1, #24 ; logical shift rig
+                                                            ht by 24 bits - sto
+                                                            re in r1
+   13 0000000C E8BD 4006       POP              {R2,R1, LR} ; r1 and r2 are res
+                                                            tored
+   14 00000010 4770            BX               LR          ; return bits in re
+                                                            gisters
+   15 00000012                 ENDFUNC
+   16 00000012                 END                          ; end of file
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\flipbits.d -o.\objects\flipbits.o -I"F:\Year 2\Small 
+Embeded Systems\Semester 2\Latest Astroids\Assignment 2 Asteroids\asteroids\RTE
+" -IC:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.0.0\Device\Include -IC:\Keil_v5\ARM\
+CMSIS\Include --predefine="__UVISION_VERSION SETA 521" --predefine="CORE_M4 SET
+A 1" --list=.\listings\flipbits.lst flipBits.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 4 in file flipBits.s
+   Uses
+      None
+Comment: .text unused
+flipBits 00000000
+
+Symbol: flipBits
+   Definitions
+      At line 8 in file flipBits.s
+   Uses
+      At line 6 in file flipBits.s
+Comment: flipBits used once
+2 symbols
+335 symbols in table

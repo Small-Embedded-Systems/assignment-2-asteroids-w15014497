@@ -30,6 +30,7 @@ int randrange(int from, int to)
 }
 
 /* Convery degrees to radians */
-const float pi = 3.1415926f;
-float radians(float degrees) { return degrees/180*pi; }
-
+float radians(float a){
+	const float pi = 3.141592;
+	return a * pi /180.0f;
+}
